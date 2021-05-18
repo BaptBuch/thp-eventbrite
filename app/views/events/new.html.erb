@@ -1,0 +1,51 @@
+<html>
+  <body>
+    <!-- ... -->
+
+    <% if @event.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p>Nous n'avons pas réussi à créer ton évènement pour la (ou les) raison(s) suivante(s) :</p>
+        <ul>
+          <% @event.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>  
+    <% end %>
+
+    
+
+    <%= form_tag url_for(action: 'create'), method: "post" do %>
+      <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+      
+      <%=label_tag 'Start date'%>
+      <input type="date" id="start" name="start_date" value=<%= Time.now%> min="2021-05-18" max="2031-12-31", <%= @event.start_date%> >
+      <br /> <br />
+
+      <%= label_tag 'Duration (in minutes)' %>
+      <%= number_field_tag 'duration', @event.duration %>
+      <br /> <br />
+    
+      <%= label_tag 'Title' %>
+      <%= text_field_tag 'title', @event.title %>
+      <br /> <br />
+
+      <%= label_tag 'Description' %>
+      <%= text_area_tag 'description', @event.description %>
+      <br /> <br />
+
+      <%= label_tag 'Price (in euros)' %>
+      <%= number_field_tag 'price', @event.price %>
+      <br /> <br />
+
+      <%= label_tag 'Location' %>
+      <%= text_field_tag 'location', @event.location %>
+      <br /> <br />
+
+      <%= submit_tag "Créer l'évènement" %>
+
+    <% end %>
+
+     
+  </body>
+</html>

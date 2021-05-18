@@ -1,0 +1,42 @@
+<html>
+<%if user_signed_in? %>
+    <div class="container p-5 mb-4  rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Bienvenue <%= current_user.first_name %> !</h1>
+            <p class="col-md-8 fs-4">Prénom : <%= current_user.first_name %></p>
+            <p class="col-md-8 fs-4">Nom : <%= current_user.last_name %></p>
+            <p class="col-md-8 fs-4">Email :<%= current_user.email %></p>
+            <p class="col-md-8 fs-4">Description :<%= current_user.description %></p>
+
+            <%= link_to "Mettre à jour son profil", edit_user_registration_path %>
+            <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete %>
+        </div>
+    </div>
+
+    <div class= "container p-5">
+        <h3>Voici les évènements : </h3>
+    </div>
+    <section class="container card-group">
+        <% @events.each do |e| %>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+
+                    <div class="card m-3 bg-white text-dark" style="width: 18rem;">
+                        <img src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                                
+                            <p class="card-title fs-2"><%= e.title %></p>
+                            <p class="card-title fs-2"><%= e.description %></p>
+                            <%= link_to "Lire son contenu", event_path(event.id), class:"btn btn-warning" %>           
+                        </div>
+                    </div>
+                </div>
+            </div>         
+                    
+        <% end %>            
+               
+    </section>
+    
+<% end %>
+    
+</html>

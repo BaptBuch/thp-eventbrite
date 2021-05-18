@@ -1,2 +1,65 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<html>
+  <body class= bg-light>
+
+    <header class="bg-dark pb-5" >
+    <section class="bg-dark text-light">
+        <div class="container pt-5 pb-5 mt-lg-6">
+          <div class="row pt-5 pb-5">
+            <div class="col">
+              <h3 class="display-5 fw-lighter ">Bienvenue sur </h3>
+              <h1 class="display-1 fw-bold"> Eventbrite by THP</h1>
+              <div class="my-4">
+                <p class="lead text-muted">Est-ce que tu veux faire des trucs ? Crée des évènements pour faire des trucs sans plus tarder !</p>
+                
+              </div>
+              <div class="">
+                <div class="row w-50 justify-content-start">
+                  <div>
+                    <%= link_to 'Propose de faire des trucs !', new_event_path, class:"btn btn-warning" %>
+                  </div>
+                  
+                </div>
+              </div>
+              
+    
+            </div>
+          </div>
+        </div>
+        
+    </section>
+  </header>
+
+
+
+  <div class="container pt-5 pb-4 fw-bold">
+    <h3 class="fw-bold display-5"> Les prochains évènements </h3>
+  </div>
+
+
+    <section class="container card-group pb-5">
+    
+      <% @events.each do |event| %> 
+      
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="col">
+
+            <div class="card m-3 bg-white text-dark" style="width: 18rem;">
+              <p class="card-title text-muted text-center pt-3 small">Event numéro <%= event.id%></p>
+              <img src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" class="card-img-top" alt="...">
+              <div class="card-body text-center">
+                
+                <p class="card-text ">Son titre: <%= event.title%></p>
+                <p class="card-text text-primary small"> Créé par : <%= event.admin.first_name%> </p>
+                <%= link_to "Lire son contenu", event_path(event.id), class:"btn btn-warning" %>
+                             
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      <% end %>
+    </section>
+
+  </body>
+
+</html>

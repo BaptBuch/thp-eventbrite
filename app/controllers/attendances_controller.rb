@@ -36,4 +36,14 @@ class AttendancesController < ApplicationController
       end
   end
 
+  def show
+    @event = Event.find(params[:event_id])
+    @attendees = []
+    @a = @event.users
+    @a.each do |user|
+      @attendees << user
+    end
+    
+  end
+
 end

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  include EventsHelper
   before_action :authenticate_user!, only: [:new, :create]
   
   def index
@@ -27,9 +28,24 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
   def show
     @event = Event.find(params[:id])
     @end_date = @event.start_date + @event.duration
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    event_params = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location)
+    if @event.update(event_params)
+      flash[:success] = "Evènement mis à jour."
+      redirect_to(@event)
+    else
+      render :edit
+    end
   end
 
 end

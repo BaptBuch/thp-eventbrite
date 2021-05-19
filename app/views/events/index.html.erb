@@ -50,6 +50,8 @@
                 
                 <p class="card-text ">Son titre: <%= event.title%></p>
                 <p class="card-text text-primary small"> Créé par : <%= event.admin.first_name%> </p>
+                <p>Nombre de participants : <%= event.attendances.count %>
+                <br/>
                 <%= link_to "Lire son contenu", event_path(event.id), class:"btn btn-warning" %>
                              
               </div>

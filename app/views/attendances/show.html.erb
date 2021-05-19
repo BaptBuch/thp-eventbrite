@@ -1,0 +1,32 @@
+<body>
+
+<h1>Voici les participants à l'évènement</h1>
+
+<section class="container">
+  
+
+<%@attendees.each do |attendee| %>
+<div class="card-group">
+  <div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4" style="width: 18rem;">
+      <img src="https://img.icons8.com/cotton/2x/gender-neutral-user--v2.png" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= attendee.first_name %> <%= attendee.last_name %></h5>
+        <p class="card-text"><%= attendee.description %></p>
+        <p class="card-text"><small class="text-muted"><%= attendee.email %></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<% end %>
+
+<br/>
+
+<%= link_to "Modifier l'évènement", edit_event_path(@event.id), class:"btn btn-warning" %>
+<%= link_to "Supprimer l'évènement", event_path(@event.id), data: {confirm: "Êtes-vous sûr de vouloir supprimer cet évènement ?"}, class:"btn btn-danger", method: "delete"%>
+</section>
+</body>

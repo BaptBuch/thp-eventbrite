@@ -1,0 +1,32 @@
+<%= form_for @event do |f|%>
+  <div class="form-group">
+    <label>Date de début</label>
+    <input class="form-control" type="date" id="start" name=":start_date" value=<%= @event.start_date%> min=<%= Time.now%> max="2031-12-31" <% :start_date %>><br />
+  </div>
+  <div class="form-group">
+    <label>Titre de l'évènement</label>
+    <%= f.text_field :title, class: 'form-control'%> <br/>
+  </div>
+  <div class="form-group">
+    <label>Contenu de l'évènement</label>
+    <%= f.text_area :description, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <label>Durée de l'évènement (en minutes)</label>
+    <%= f.number_field :duration, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <label>Prix de l'évènement (en euros)</label>
+    <%= f.number_field :price, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <label>Lieux de l'évènement</label>
+    <%= f.text_field :location, class: 'form-control'%> <br/>
+  </div>
+
+
+  <div class="form-group">
+    <button type="submit", class="btn btn-primary">Modifier l'évènement</button>
+  </div>
+
+  <% end %>

@@ -18,7 +18,7 @@
                 <p class="text-muted ">Evènement n°<%= params[:id] %></p>
                 <h2 class="col-md-8 display-4">Son titre: <%= @event.title %></h2>
                 <p>Son contenu : <%= @event.description %> </p>
-                <p>Nombre de participants : <%= @event.users.count %>
+                <p>Nombre de participants : <%= @event.attendances.count %>
                 
                 <p>Ecrit par <%= @event.admin.first_name%> // <%= @event.admin.email%> </p>
                 <p>Sa date de début:<%= @event.start_date %></p>
@@ -26,9 +26,13 @@
                 <p>Le lieu de l'évènement:<%= @event.location %></p>
                 <p>Le prix de l'évènement:<%= @event.price %>€</p>
                 <p class="text-muted">Créé le :<%= @event.created_at%></p>
-                <div class="row pt-3">
-                  
+                <% if current_user != @event.admin && current_user %>
+                <div>
+                  <%= link_to 'Acheter un billet pour cet évènement', new_event_attendance_path(@event), class:"btn btn-warning", event:params[:event] %>
                 </div>
+                
+                <% end %>
+                
             </div>
       </div>
       

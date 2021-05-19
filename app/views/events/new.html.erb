@@ -19,7 +19,7 @@
       <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
       
       <%=label_tag 'Start date'%>
-      <input type="date" id="start" name="start_date" value=<%= Time.now%> min="2021-05-18" max="2031-12-31", <%= @event.start_date%> >
+      <input type="date" id="start" name="start_date" value=<%= Time.now%> min=<%= Time.now%> max="2031-12-31", <%= @event.start_date%> >
       <br /> <br />
 
       <%= label_tag 'Duration (in minutes)' %>

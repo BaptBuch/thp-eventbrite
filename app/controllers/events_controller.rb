@@ -18,6 +18,7 @@ class EventsController < ApplicationController
     @event.description = params[:description]
     @event.price = params[:price]
     @event.location = params[:location]
+    @event.picture = params[:picture]
     @event.admin = current_user
 
     if @event.save
@@ -39,7 +40,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    event_params = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location)
+    event_params = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, :picture)
     if @event.update(event_params)
       flash[:success] = "Evènement mis à jour."
       redirect_to(@event)

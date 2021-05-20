@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   has_many :attendances, dependent: :destroy
   has_many :users, through: :attendances
   belongs_to :admin, class_name: "User"
+  has_one_attached :picture
   
   validates :start_date, 
     presence: true
@@ -26,6 +27,7 @@ class Event < ApplicationRecord
     numericality: {greater_than: 0, less_than: 1001}
   
   validates :location, presence: true
+  validates :picture, presence: true
 
   def is_a_multiple_of_5
     if (duration.to_i)%5 != 0

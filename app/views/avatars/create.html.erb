@@ -1,0 +1,13 @@
+<%if @user.avatar.attached?%>
+<h3>Voici ton avatar actuel</h3>
+  <%= image_tag @user.avatar, alt: 'avatar' %>
+  <p> Tu peux le modifier via le formulaire ci-dessous. </p>
+<%else%>
+  <p>Tu n'as pas encore d'avatar ! Tu peux en ajouter un via la formulaire ci-dessous. </p>
+<%end%>
+
+
+<%= form_tag user_avatars_path(@user), multipart: true do %>
+  <%= file_field_tag :avatar %>
+  <%= submit_tag "mettre à jour" %>
+<% end %>

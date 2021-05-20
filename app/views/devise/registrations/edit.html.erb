@@ -1,5 +1,6 @@
-test
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<h2>Salut <%= @current_user.first_name%>!</h2>
+<h4>Voici le formulaire complet pour mettre à jour les informations de ton profil.</h4>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -29,7 +30,7 @@ test
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password %> <i>(Laisse cette section vide si tu ne veux pas modifier ton mot de passe)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
@@ -43,17 +44,37 @@ test
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password %> <i>(Nous avons besoin de ton mot de passe actuel pour confirmer les modifications)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+<br/>
+
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Mettre à jour", class:"btn btn-success" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+==============================
+  <%if @user.avatar.attached?%>
+<h3>Voici ton avatar actuel</h3>
+  <%= image_tag @user.avatar, alt: 'avatar' %>
+  <p> Choisis une nouvelle image pour le modifier: </p>
+<%else%>
+  <p>Tu n'as pas encore d'avatar ! Tu peux en ajouter un via la formulaire ci-dessous. </p>
+<%end%>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%= form_tag user_avatars_path(@user), multipart: true do %>
+  <%= file_field_tag :avatar %><br/><br/>
+  <%= submit_tag "Mettre à jour", class:"btn btn-success" %>
+<% end %>
+
+==================================
+<h4>Supprimer ton compte</h4>
+
+<p>Si tu le souhaites, tu peux également supprimer ton compte.</p> 
+<p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"  %></p>
+==================================
+<br/>
+<%= link_to "Retourner à mon profil", :back, class:"btn btn-light" %>

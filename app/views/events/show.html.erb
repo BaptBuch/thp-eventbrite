@@ -10,57 +10,60 @@
         </ul>
       </div>  
   <% end %>
+
   <body>
+
+
+  <%if @event.picture.attached?%>
+    <%= image_tag(@event.picture)%>
+  <% else %>
+    <img src="https://images-ext-1.discordapp.net/external/2dkSeg_r2Aj4f58DnU-LOfOLyIZfyMoTm9gYYNf_EUU/https/www.pkfoot.com/wp-content/uploads/2020/03/foot-anglais.jpg?width=1130&height=660" alt="...">
+  <% end %>
+
   
     <header class="bg-dark ">
       <div class="container p-5 mb-4 rounded-3 text-light">
-            <div class="container-fluid py-5">
+        <div class="container-fluid py-5">
               
-                <p class="text-muted ">Evènement n°<%= params[:id] %></p>
-                <h2 class="col-md-8 display-4">Son titre: <%= @event.title %></h2>
-                <p>Son contenu : <%= @event.description %> </p>
-                <p>Nombre de participants : <%= @event.attendances.count %>
+          <p class="text-muted ">Evènement n°<%= params[:id] %></p>
+          <h2 class="col-md-8 display-4">Son titre: <%= @event.title %></h2>
+          <p>Son contenu : <%= @event.description %> </p>
+          <p>Nombre de participants : <%= @event.attendances.count %>
                 
-                <p>Ecrit par <%= @event.admin.first_name%> // <%= @event.admin.email%> </p>
-                <p>Sa date de début:<%= @event.start_date %></p>
-                <p>Sa date de fin: <%= @end_date %>
-                <p>Le lieu de l'évènement:<%= @event.location %></p>
-                <p>Le prix de l'évènement:<%= @event.price %>€</p>
-                <p class="text-muted">Créé le :<%= @event.created_at%></p>
+          <p>Ecrit par <%= @event.admin.first_name%> // <%= @event.admin.email%> </p>
+          <p>Sa date de début:<%= @event.start_date %></p>
+          <p>Sa date de fin: <%= @end_date %>
+          <p>Le lieu de l'évènement:<%= @event.location %></p>
+          <p>Le prix de l'évènement:<%= @event.price %>€</p>
+          <p class="text-muted">Créé le :<%= @event.created_at%></p>
+                  
+          <% if user_signed_in?  %>
+            <% if current_user == @event.admin %>
+              <div>
+                <%= link_to 'Mon espace évènement', event_attendance_path(@event), class:"btn btn-warning", event:params[:event] %>
+              </div>
+
+            <% elsif is_current_user_attendee == true %>
+                
+              <p>Tu participes déjà à cet événement, cliques ici pour voir d'autres événements suceptibles de te plaire:</p> 
+              <%= link_to 'Liste des évènements existants', root_path, class:"btn btn-warning"%>
               
-              
-              <% if user_signed_in?  %>
-
-
-                <% if current_user == @event.admin %>
-
-                <div>
-                  <%= link_to 'Mon espace évènement', event_attendance_path(@event), class:"btn btn-warning", event:params[:event] %>
-                </div>
-
-
-                <% elsif is_current_user_attendee == true %>
+            <% else %>
                 
-                <p>Tu participes déjà à cet événement, cliques ici pour voir d'autres événements suceptibles de te plaire:</p> 
-                <%= link_to 'Liste des évènements existants', root_path, class:"btn btn-warning"%>
+              <div>
+                <%= link_to 'Acheter un billet pour cet évènement', new_event_attendance_path(@event), class:"btn btn-warning", event:params[:event] %>
+              </div>
                 
-                <% else %>
-                
-                <div>
-                  <%= link_to 'Acheter un billet pour cet évènement', new_event_attendance_path(@event), class:"btn btn-warning", event:params[:event] %>
-                </div>
-                
-                <% end %>
+            <% end %>
 
-                <% else %>
-                <div>
-                  <%= link_to 'Se connecter pour acheter un billet', new_user_session_path, class:"btn btn-warning", event:params[:event] %>
-                </div>
-                
+          <% else %>
+            <div>
+              <%= link_to 'Se connecter pour acheter un billet', new_user_session_path, class:"btn btn-warning", event:params[:event] %>
             </div>
+          <% end %>
+        </div>
       </div>
-      
-      <% end %>
-      
+
     </header>
-    </body>
+  </body>
+</html>

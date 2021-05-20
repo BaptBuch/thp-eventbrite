@@ -1,0 +1,13 @@
+<%if @event.picture.attached?%>
+<h3>Voici la photo actuelle de l'évènement</h3>
+  <%= image_tag @event.picture, alt: 'picture' %>
+  <p> Tu peux la modifier via le formulaire ci-dessous. </p>
+<%else%>
+  <p>Tu n'as pas encore ajouter de photo pour ton évènement ! Tu peux en ajouter une via la formulaire ci-dessous. </p>
+<%end%>
+
+
+<%= form_tag event_pictures_path(@event), multipart: true do %>
+  <%= file_field_tag :picture %>
+  <%= submit_tag "mettre à jour" %>
+<% end %>

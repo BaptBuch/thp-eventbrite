@@ -45,7 +45,12 @@
 
             <div class="card m-3 bg-white text-dark" style="width: 18rem;">
               <p class="card-title text-muted text-center pt-3 small">Event numéro <%= event.id%></p>
-              <img src="https://images-ext-1.discordapp.net/external/2dkSeg_r2Aj4f58DnU-LOfOLyIZfyMoTm9gYYNf_EUU/https/www.pkfoot.com/wp-content/uploads/2020/03/foot-anglais.jpg?width=1130&height=660" class="card-img-top" alt="...">
+              <%if event.picture.attached?%>
+                <%= image_tag(event.picture)%>
+              <% else %>
+                <img src="https://images-ext-1.discordapp.net/external/2dkSeg_r2Aj4f58DnU-LOfOLyIZfyMoTm9gYYNf_EUU/https/www.pkfoot.com/wp-content/uploads/2020/03/foot-anglais.jpg?width=1130&height=660" class="card-img-top" alt="...">
+              <% end %>
+                
               <div class="card-body text-center">
                 
                 <p class="card-text ">Son titre: <%= event.title%></p>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/baa801bcb8.js" crossorigin="anonymous"></script>
+
+
+    <title>Cartes</title>
+</head>
+<body>
+
+  <section class="container card-group">
+
+<% @events.each do |event| %> 
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card m-3 card-hover" style="width: 18rem;">
+         <%if event.picture.attached?%>
+            
+            <%= image_tag(event.picture)%>
+          <% else %>
+            <%= image_tag("https://images-ext-1.discordapp.net/external/2dkSeg_r2Aj4f58DnU-LOfOLyIZfyMoTm9gYYNf_EUU/https/www.pkfoot.com/wp-content/uploads/2020/03/foot-anglais.jpg?width=1130&height=660")%>
+
+          <% end %>
+          <!-- Card Body -->
+          <div class="card-body">
+            <h4 class="mb-2 text-truncate-line-2 "><%= link_to event.title, event_path(event.id), class:"text-decoration-none"%></a></h4>
+            <!-- List -->
+            <ul class="my-3 list-inline">
+              <li class="list-inline-item ">
+                <i class="far fa-clock mr-1"></i><a> </a><%= event.duration %> minutes
+              </li>
+              <li class="list-inline-item">
+                <i class="fas fa-euro-sign"></i><a> </a><%= event.price %>
+              </li>
+            </ul>
+            <ul class="my-3 list-inline">
+              <li class="list-inline-item">
+                <i class="fas fa-map-marker-alt"><a> </a></i><%= event.location%>              
+              </li>
+              
+            </ul>
+            <div class="lh-1">
+              <span>
+                <i class="fas fa-user-friends"></i>
+              </span>
+              <span class="font-size-xs text-muted"><%= event.attendances.count %></span>
+              <span class="text-warning text-muted">participants</span>
+            </div>
+          </div>
+          <!-- Card Footer -->
+          <div class="card-footer">
+            <div class="row align-items-center no-gutters">
+              <div class="col-auto">
+                <img src="assets/images/avatar/avatar-4.jpg" class="rounded-circle avatar-xs" alt="">
+              </div>
+              <div class="col ml-2">
+                <span>Créé par : <%= event.admin.first_name%></span>
+              </div>
+              <div class="col-auto">
+                <a href="#!" class="text-muted bookmark">
+                  <i class="fe fe-bookmark  "></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<% end %>
+    
+  </section>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

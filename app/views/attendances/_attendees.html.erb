@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/baa801bcb8.js" crossorigin="anonymous"></script>
+
+
+    <title>Cartes</title>
+</head>
+<body>
+
+
+<h3>Cartes participants événements</h3>
+<section class="container">
+<%@attendees.each do |attendee| %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6 mt-3">
+        <div class="card">
+          <div class="card-horizontal">
+            <div class="img-square-wrapper">
+              <img class="" src="http://via.placeholder.com/300x180" alt="Card image cap" height="100px" width="100px">
+            </div>
+            <div class="card-body">
+              <%= attendee.first_name %> <%= attendee.last_name %>
+              <p class="card-text"><%= attendee.description %></p>
+              <p class="card-text"><small class="text-muted"><%= attendee.email %></small></p>
+            </div>
+          </div>
+          <div class="card-footer align-items-center justify-content-center">
+            <small><a href="#" class="text-muted text-right">voir profil</a></small>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+<% end %>
+</section>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

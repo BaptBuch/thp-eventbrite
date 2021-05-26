@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  
+  <title>Eventbrite</title>
+  
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+</head>
+
+<body>
+  <header class="d-flex justify-content-center bg-primary">
+      
+  <section class=" d-flex justify-content-center bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+      <%= link_to "EVENTBRITE", root_path, class: "navbar-brand"%>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Notre équipe</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Aide</a>
+          </li>
+
+  <%if user_signed_in? %>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Mon espace                    
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Mon profil", user_path(current_user.id), class: "dropdown-item" %>
+              <%= link_to "Créer un évènement", new_event_path, class: "dropdown-item"%>
+              
+              <%= link_to "Se déconnecter", destroy_user_session_path, class: "dropdown-item bg-danger text-white", method: :delete %>
+            </div>
+          </li>
+
+  <% else %>
+
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Rejoindre la communauté 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Se connecter', new_user_session_path, class: "dropdown-item " %>
+              <%= link_to "Rejoindre la communauté", new_user_registration_path, class: "dropdown-item" %>
+            </div>
+          </li>
+  <% end %>
+                  
+
+        </ul>       
+      </div>
+    </nav>
+  </section>
+
+
+
+  </header>
+
+  <footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  </footer>
+</body>
+</html>

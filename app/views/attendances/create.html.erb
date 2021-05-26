@@ -4,4 +4,4 @@
 
 <h3>Un email vous a été envoyé à <%= @current_user.email %> avec le récapitulatif de votre commande. A bientôt sur notre site !</h3>
 
-<%= link_to "Retour à la page de l'évènement", event_path(event.id), class:"btn btn-warning" %>
+<%= link_to "Retour à la page de l'évènement", event_path(@event.id), class:"btn btn-warning" %>

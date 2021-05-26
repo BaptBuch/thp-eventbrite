@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/baa801bcb8.js" crossorigin="anonymous"></script>
+
+    <title><%= @event.title %></title>
+</head>
+<body>
+
+   <section class="container p-5"> 
+     
+        <div class="row border border-primary">
+          <%if @event.picture.attached?%>
+            <%= image_tag(@event.picture)%>
+          <% else %>
+            <div class="col-8 bg-image bg-img-cover" style="
+            background-image: url('https://images-ext-1.discordapp.net/external/2dkSeg_r2Aj4f58DnU-LOfOLyIZfyMoTm9gYYNf_EUU/https/www.pkfoot.com/wp-content/uploads/2020/03/foot-anglais.jpg?width=1130&height=660'); height: 300px;">
+            </div>
+          <% end %>
+            
+            <div class="col-4">
+                
+                <p><%= @event.start_date %></p>
+                <h3><%= @event.title %></h3>
+                <p>by <p><%= @event.admin.first_name %></p></p>
+            </div>
+        </div>  
+    
+    <div class="row py-3 border border-primary">
+        <div class="col-8">
+            <i class="far fa-heart"></i>
+
+            <i class="fas fa-download"></i>
+        </div>
+        <div class="col-4">
+            <% if user_signed_in?  %>
+            <% if current_user == @event.admin %>
+              <div>
+                <%= link_to 'Mon espace évènement', event_attendance_path(@event), class:"btn btn-warning", event:params[:event] %>
+              </div>
+
+            <% elsif is_current_user_attendee == true %>
+                
+              <p>Tu participes déjà à cet événement, cliques ici pour voir d'autres événements suceptibles de te plaire:</p> 
+              <%= link_to 'Liste des évènements existants', root_path, class:"btn btn-warning"%>
+              
+            <% elsif %>
+                
+              <div>
+                <%= link_to 'Acheter un billet pour cet évènement', new_event_attendance_path(@event), class:"btn btn-warning", event:params[:event] %>
+              </div>
+                
+            <% end %>
+
+          <% else %>
+            <div>
+              <%= link_to 'Se connecter pour acheter un billet', new_user_session_path, class:"btn btn-warning", event:params[:event] %>
+            </div>
+          <% end %>
+        </div>
+        
+    </div>
+    <div class="row border border-primary py-3">
+        <div class="col-8 w-80">
+            <p><%= @event.description %> </p>
+        </div>
+
+        <div class="col-4">
+            <p></p>
+            <p class="text-primary"><%= @event.start_date %> </p>
+            <ul class="my-3 list-inline">
+                    <li class="list-inline-item ">
+                        <i class="far fa-clock mr-1"></i><%= @event.duration %> 
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="fas fa-euro-sign"></i><%= @event.price %> 
+                    </li>
+                    
+            </ul>
+            <div class="lh-1">
+                <span>
+                    <i class="fas fa-user-friends"></i>
+                </span>
+                <span class="font-size-xs text-muted"><%= @event.attendances.count %></span>
+                <span class="text-warning text-muted">Participants</span>
+                    
+            </div>
+        </div>
+
+    </div>
+    <div class="row py-3 border border-primary">
+        <div class="col-8">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-linkedin-in"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+        <div class="col-4">
+            
+        </div>
+    </div>    
+   </section>
+
+      <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
